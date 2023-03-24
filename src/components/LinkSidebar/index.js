@@ -1,12 +1,19 @@
 import React from 'react'
 import "./style.scss"
+import { NavLink } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 export default function LinkSidebar({link}) {
   return (
-    <div className='link-single'>
+    <NavLink
+    to={link.to}
+    className={({ isActive, isPending }) =>
+    isPending ? "" : isActive ? "link-single active" : "link-single"
+  }
+    >
         <div className='link-single-left'>
-            {link.icon} <h3>{link.name}</h3>
+            <FontAwesomeIcon icon={link.icon}/> <h3>{link.name}</h3>
         </div>
-        <div className='link-single-right'>dsa</div>
-    </div>
+        {link.isNofity && <div className='link-single-right'>1</div>}
+    </NavLink>
   )
 }

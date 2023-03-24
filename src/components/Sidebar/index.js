@@ -1,27 +1,39 @@
-import React from 'react'
+import React,{useState} from 'react'
 import "./style.scss"
-import {FaRegSmileBeam} from "react-icons/fa"
 import LinkSidebar from '../LinkSidebar'
+import { NavLink } from 'react-router-dom'
+import { faBell, faDatabase, faHome, faStethoscope, faWrench } from '@fortawesome/free-solid-svg-icons'
 const links = [
   {
     name: "Tổng quan",
-    icon: <FaRegSmileBeam/>
+    to: "/",
+    icon: faHome,
+    isNofity: false,
   },
   {
     name: "Điều khiển",
-    icon: <FaRegSmileBeam/>
+    to: "/control",
+    isNofity: false,
+    icon: faWrench
   },  {
     name: "Dữ liệu",
-    icon: <FaRegSmileBeam/>
+    isNofity: false,
+    to: "/datalog",
+    icon: faDatabase
   },  {
     name: "Chẩn đoán",
-    icon: <FaRegSmileBeam/>
+    to: "/chandoan",
+    isNofity: true,
+    icon: faStethoscope
   },  {
     name: "Thông báo",
-    icon: <FaRegSmileBeam/>
+    to: "/notification",
+    isNofity: true,
+    icon: faBell
   }
 ]
 export default function Sidebar() {
+  // const [active, setActive] = useState(123);
   return (
     <>
     <div className='sidebar-header'>
@@ -32,7 +44,7 @@ export default function Sidebar() {
     <div className='sidebar-header-bottom'>
       {
         links.map((link, index)=>{
-          return <LinkSidebar index={index} link={link}/>
+          return <LinkSidebar key={index} link={link}/>
         })
       }
     </div>

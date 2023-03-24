@@ -1,27 +1,29 @@
+import { faBell, faCaretDown, faGear } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
-import { FaTimes } from 'react-icons/fa'
+// import { FaTimes } from 'react-icons/fa'
 import "./style.scss"
 export default function Header() {
   return (
     <div className='header-home'>
       <div className='header-home-wrap'>
         <div className='header-home-left'
-        
+
         >
           <h2>Chào mừng trở lại, Kiệt</h2>
           <p>Đây là hệ thống chăm sóc dâu tây môn Đồ án đa ngành</p>
         </div>
         <div className='header-home-right'>
           <div>
-            <FaTimes/>
+            <FontAwesomeIcon icon={faGear}/>
           </div>
           <div>
-          <FaTimes/>
+          <FontAwesomeIcon icon={faBell}/>
           </div>
           <div className='name-user'>
-            <FaTimes/>
+            <img  src="./bedautay.png" alt='bedautay' className='avar-user'/>
             <h2>Nguyễn Tuấn Kiệt</h2>
-            <FaTimes/>
+            <FontAwesomeIcon icon={faCaretDown}/>
           </div>
         </div>
       </div>

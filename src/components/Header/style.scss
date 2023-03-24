@@ -20,6 +20,10 @@
                 padding-left: 15px;
                 display: flex;
                 align-items: c;
+                svg {
+                    font-size: 20px;
+                    cursor: pointer;
+                }
             }
             display: flex;
             align-items: center;
@@ -28,6 +32,16 @@
                 align-items: center;
                 padding-left: 8px;
                 padding-right: 8px;
+                .avar-user {
+                    width: 30px;
+                    border-radius: 50%;
+                    height: 30px;
+                    object-fit: cover;
+                    background-color: red;
+                }
+                h2{
+                    padding: 0px 4px;
+                }
             }
         }
     }
