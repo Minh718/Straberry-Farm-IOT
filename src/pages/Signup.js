@@ -1,10 +1,11 @@
 import { useState } from "react"
 import { useSignup } from "../hooks/useSignup"
 import FileBase from 'react-file-base64';
-
+import { useNavigate } from "react-router";
 import "./Login.scss"
 
 const Signup = () => {
+    const navigate = useNavigate();
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [avatar, setAvatar] = useState();
@@ -45,7 +46,8 @@ const Signup = () => {
                         multiple={false}
                         onDone={({ e }) => setAvatar(e)}
                     />
-                    <button disabled={isLoading}>Sign up</button>
+                    <button disabled={isLoading} className="btn-signup">Sign up</button>
+                    <button  className="btn-signup" onClick={()=>navigate("/login")}>go to login</button>
                     {error && <div className="error">{error}</div>}
                 </form>
             </div>

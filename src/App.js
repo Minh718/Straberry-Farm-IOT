@@ -31,10 +31,11 @@ import Login from "./pages/Login";
 import Signup from './pages/Signup'
 import Dashboard from "./components/Dashboard";
 import Control from "./pages/Control";
+import Datalog from "./components/Datalog/Datalog";
 
 
 const App = () => {
-    const user = true;
+    const {user} = useAuthContext();
 
     return (<BrowserRouter>
         {user ?
@@ -42,11 +43,11 @@ const App = () => {
                 <Route path="/" element={<WebsiteLayout />}>
                     <Route path="" element={<Dashboard />} />
                     <Route path="control" element={<Control />} />
-                    <Route path="data" element={<Dashboard />} />
+                    <Route path="datalog" element={<Datalog />} />
                     <Route path="diagnose" element={<Dashboard />} />
                     <Route path="notification" element={<Dashboard />} />
-                    <Route path="login" element={<Login />} />
-                    <Route path="signup" element={<Signup />} />
+                    {/* <Route path="login" element={<Login />} /> */}
+                    {/* <Route path="signup" element={<Signup />} /> */}
                 </Route>
             </Routes> :
             <LoginLayout>

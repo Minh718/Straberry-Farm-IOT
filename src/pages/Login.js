@@ -1,8 +1,10 @@
 import { useState } from "react"
 import { useLogin } from "../hooks/useLogin"
+import { useNavigate } from "react-router"
 import "./Login.scss"
 
 const Login = () => {
+    const navigate = useNavigate();
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const { login, error, isLoading } = useLogin()
@@ -11,6 +13,7 @@ const Login = () => {
         e.preventDefault()
 
         await login(email, password)
+        navigate("/")
     }
 
     return (
@@ -37,7 +40,8 @@ const Login = () => {
                         value={password}
                     />
 
-                    <button disabled={isLoading}>Log in</button>
+                    <button disabled={isLoading} className="btn-login" >Log in</button>
+                    <button disabled={isLoading} className="btn-signup" onClick={()=>navigate("/signup")}>Go to sign Up</button>
                     {error && <div className="error">{error}</div>}
                 </form>
             </div>
