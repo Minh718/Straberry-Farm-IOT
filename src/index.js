@@ -3,13 +3,23 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import AppProvider from './context';
 import "./sassStyles/global.scss"
+// const root = ReactDOM.createRoot(document.getElementById('root'));
+// root.render(
+//   <React.StrictMode>
+//     <AppProvider>
+//     <App/>
+//     </AppProvider>
+//   </React.StrictMode>
+import { AuthContextProvider } from './context/AuthContext';
+import "./sassStyles/global.scss"
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <AppProvider>
-    <App/>
-    </AppProvider>
-  </React.StrictMode>
+    <React.StrictMode>
+        <AuthContextProvider>
+            <App />
+        </AuthContextProvider>
+    </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
