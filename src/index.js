@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import AppProvider from './context';
+//import AppProvider from './context';
 import "./sassStyles/global.scss"
 // const root = ReactDOM.createRoot(document.getElementById('root'));
 // root.render(
@@ -11,15 +11,18 @@ import "./sassStyles/global.scss"
 //     </AppProvider>
 //   </React.StrictMode>
 import { AuthContextProvider } from './context/AuthContext';
+import AppProvider from './context/index';
 import "./sassStyles/global.scss"
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <React.StrictMode>
+    //<React.StrictMode>
+        <AppProvider>
         <AuthContextProvider>
             <App />
         </AuthContextProvider>
-    </React.StrictMode>
+        </AppProvider>
+    //</React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

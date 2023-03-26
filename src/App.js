@@ -32,11 +32,37 @@ import Signup from './pages/Signup'
 import Dashboard from "./components/Dashboard";
 import Control from "./pages/Control";
 import Datalog from "./components/Datalog/Datalog";
-
+import {useGlobalContext} from './context/index';
+import client from './utils/adafruit';
 
 const App = () => {
     const {user} = useAuthContext();
-
+    const {setTemperature,setLightIntensity,setHumidity,setLightBtn,setPumperBtn,setAirBtn} = useGlobalContext()
+    client.on('message', (topic, message, packet) => {
+        console.log("Received '" + message + "' on '" + topic + "'");
+        switch (topic.split("/")[2]){
+            case 'humidity-sensor':
+                setHumidity((message.toString()));
+                break;
+            case 'temperature-sensor':
+                setTemperature((message.toString()));
+                break;
+            case 'light-sensor':
+                setLightIntensity((message.toString()));
+                break;
+            case 'fan':
+                setAirBtn((message.toString()));
+                break;
+            case 'pumper':
+                setPumperBtn((message.toString()));
+                break;
+            case 'led':
+                setLightBtn((message.toString()));
+                break;
+            default:
+                break;
+        }
+    });
     return (<BrowserRouter>
         {user ?
             <Routes>
@@ -54,7 +80,7 @@ const App = () => {
                 <Routes>
                     <Route path="/" element={<Navigate replace to="login" />} />
                     <Route path='/login' element={<Login />} />
-                    <Route path="signup" element={<Signup />} />
+                    <Route path="/signup" element={<Signup />} />
                 </Routes>
             </LoginLayout>
         }
