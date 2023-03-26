@@ -7,7 +7,7 @@ const ManualControl = () => {
     return (
         <FormGroup>
             <FormLabel component="legend">
-                <Typography variant="h5" sx={{ textTransform: "uppercase", padding: '20px' }}>Điều khiển thủ công</Typography>
+                <Typography color='black' variant="h5" sx={{ textTransform: "uppercase", padding: '20px' }}>Điều khiển thủ công</Typography>
             </FormLabel>
             <Stack direction="row" spacing={2}>
                 {[0, 1, 2].map(x => <ControlSwitch key={x} type={x} />)}
