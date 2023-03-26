@@ -74,7 +74,7 @@ export default function Dashboard() {
       default:
         return <div>
           <h2>Nhiệt độ</h2>
-          <p>24°C</p>
+          <p>{temperature}°C</p>
         </div>;
     }
   }

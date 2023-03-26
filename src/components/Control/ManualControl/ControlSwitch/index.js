@@ -1,7 +1,6 @@
-import React from 'react'
-import { Grid, Stack, Typography, Slider, Paper } from '@mui/material';
+import { Grid, Stack, Typography, Slider, Paper,Switch } from '@mui/material';
 import React,{useState,useEffect} from 'react'
-import { Box, Grid, Stack, Switch, Typography, } from '@mui/material';
+
 
 import AcUnitIcon from '@mui/icons-material/AcUnit';
 import ShowerIcon from '@mui/icons-material/Shower';
@@ -17,8 +16,6 @@ const types = [
     { name: "Đèn", icon: <LightbulbIcon /> }
 ]
 
-const ControlStyledSwitch = ({ type }) => {
-    const { name, icon } = types[type];
 const ControlSwitch = (props) => {
     const {device,type} = props
     const [checked,setChecked] = useState(device.value)
@@ -63,5 +60,4 @@ const ControlSwitch = (props) => {
         </Paper>
     )
 }
-}
-export default ControlStyledSwitch
+export default ControlSwitch

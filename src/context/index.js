@@ -2,7 +2,8 @@ import {useContext, createContext, useState,useEffect} from "react";
 import axios from 'axios';
 
 const username = 'Heo_Rey'
-const key = 'aio_ytWg01LkyDDHKOEPbN6AO8XIDmpt'
+const key = 'aio_CIZZ32S1wkz926B26JbS0sicVDJH'
+
 async function getLastValue (feed_id){
     const url = `https://io.adafruit.com/api/v2/${username}/feeds/${feed_id}/data/last`;
     const options = {

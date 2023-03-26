@@ -1,7 +1,7 @@
 import mqtt from "precompiled-mqtt";
 
 const username = 'Heo_Rey'
-const key = 'aio_ytWg01LkyDDHKOEPbN6AO8XIDmpt'
+const key = 'aio_CIZZ32S1wkz926B26JbS0sicVDJH'
 
 const brokerUrl = `mqtts://${username}:${key}@io.adafruit.com`
 const options = {
