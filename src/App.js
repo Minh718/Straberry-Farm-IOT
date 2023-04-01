@@ -11,7 +11,7 @@
 // <Route path="/" element={<Home/>}>
 //   <Route path="/" element={<Dashboard/>}/>
 //   <Route path="/datalog" element={<Datalog/>}/>
-  
+
 // </Route>
 //     ): (
 // <Route path="/" element={<Login/>}/>
@@ -32,15 +32,15 @@ import Signup from './pages/Signup'
 import Dashboard from "./components/Dashboard";
 import Control from "./pages/Control";
 import Datalog from "./components/Datalog/Datalog";
-import {useGlobalContext} from './context/index';
+import { useGlobalContext } from './context/index';
 import client from './utils/adafruit';
 
 const App = () => {
-    const {user} = useAuthContext();
-    const {setTemperature,setLightIntensity,setHumidity,setLightBtn,setPumperBtn,setAirBtn} = useGlobalContext()
+    const { user } = useAuthContext();
+    const { setTemperature, setLightIntensity, setHumidity, setLightBtn, setPumperBtn, setAirBtn } = useGlobalContext()
     client.on('message', (topic, message, packet) => {
         console.log("Received '" + message + "' on '" + topic + "'");
-        switch (topic.split("/")[2]){
+        switch (topic.split("/")[2]) {
             case 'humidity-sensor':
                 setHumidity((message.toString()));
                 break;
@@ -66,25 +66,26 @@ const App = () => {
     return (<BrowserRouter>
         {user ?
             <Routes>
-                <Route path="/" element={<WebsiteLayout />}>
+                <Route element={<WebsiteLayout />}>
                     <Route path="" element={<Dashboard />} />
                     <Route path="control" element={<Control />} />
                     <Route path="datalog" element={<Datalog />} />
                     <Route path="diagnose" element={<Dashboard />} />
                     <Route path="notification" element={<Dashboard />} />
-                    {/* <Route path="login" element={<Login />} /> */}
-                    {/* <Route path="signup" element={<Signup />} /> */}
+                    <Route path="login" element={<Login />} />
+                    <Route path="signup" element={<Signup />} />
                 </Route>
             </Routes> :
-            <LoginLayout>
-                <Routes>
-                    <Route path="/" element={<Navigate replace to="login" />} />
-                    <Route path='/login' element={<Login />} />
-                    <Route path="/signup" element={<Signup />} />
-                </Routes>
-            </LoginLayout>
+
+            <Routes>
+                <Route element={<LoginLayout />}>
+                    <Route path="/" element={<Navigate to="/login" />} />
+                    <Route path='login' element={<Login />} />
+                    <Route path="signup" element={<Signup />} />
+                </Route>
+            </Routes>
         }
-    </BrowserRouter>)
+    </BrowserRouter >)
 }
 
 export default App;

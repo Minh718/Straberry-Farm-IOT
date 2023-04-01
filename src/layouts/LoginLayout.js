@@ -2,7 +2,7 @@ import React from 'react'
 import { Outlet } from 'react-router-dom'
 import "./LoginLayout.scss"
 
-const LoginLayout = ({children}) => {
+const LoginLayout = () => {
     return (<>
         <div className='login-header'>
             <div className='login-header-wrap'>
@@ -21,7 +21,7 @@ const LoginLayout = ({children}) => {
                 </div>
             </div>
         </div>
-        {children}
+        <Outlet />
     </>)
 }
 
