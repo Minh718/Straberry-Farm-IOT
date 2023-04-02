@@ -11,8 +11,8 @@ const diaries = [
 const ControlDiary = () => {
     return (
         <Stack alignItems="center">
-            <Typography variant="h5" sx={{ textTransform: "uppercase", padding: '20px' }}>Nhật ký hoạt động</Typography>
-            <TableContainer component={Paper}>
+            <Typography variant="h5" sx={{ textTransform: "uppercase", pb: 2 }}>Nhật ký hoạt động</Typography>
+            <TableContainer component={Paper} sx={{maxHeight: '200px'}}>
                 <Table>
                     <TableRow>
                         <TableCell>Ngày</TableCell>
