@@ -1,8 +1,11 @@
 import React,{useState} from 'react'
 import "./style.scss"
+import { useNavigate } from 'react-router-dom'
 import LinkSidebar from '../LinkSidebar'
 import { NavLink } from 'react-router-dom'
 import { faBell, faDatabase, faHome, faStethoscope, faWrench } from '@fortawesome/free-solid-svg-icons'
+// import {useAuthContext} from "../hooks/useAuthContext"
+import {useAuthContext} from '../../hooks/useAuthContext'
 const links = [
   {
     name: "Tổng quan",
@@ -33,6 +36,10 @@ const links = [
   }
 ]
 export default function Sidebar() {
+  const {dispatch} = useAuthContext();
+  const handleLogout = ()=>{
+    dispatch({type: "LOGOUT", payload: null})
+  }
   // const [active, setActive] = useState(123);
   return (
     <>
@@ -50,7 +57,8 @@ export default function Sidebar() {
     </div>
     </div>
    <div className='sidebar-bottom'>
-    <button>Đăng xuất</button>
+    <button onClick={handleLogout}
+      >Đăng xuất</button>
    </div>
     </>
   )

@@ -8,14 +8,19 @@ const Signup = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [avatar, setAvatar] = useState();
+    const [confirmPassword, setConfirmPassword] = useState();
 
     const { signup, error, isLoading } = useSignup()
 
     const handleSubmit = async (e) => {
+        console.log(confirmPassword, password)
         e.preventDefault()
+        if(password !== confirmPassword) {
+            console.log("oke")
+            alert("Password nhập lại không chính xác")
+        }
 
-        await signup(email, password)
+        else await signup(email, password)
     }
 
     return (
@@ -41,12 +46,13 @@ const Signup = () => {
                         onChange={(e) => setPassword(e.target.value)}
                         value={password}
                     />
-                    <FileBase
-                        type="file"
-                        multiple={false}
-                        onDone={({ e }) => setAvatar(e)}
+                    <label>Confirm Password:</label>
+                    <input
+                        type="password"
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        value={confirmPassword}
                     />
-                    <button disabled={isLoading} className="btn-signup">Sign up</button>
+                    <button className="btn-signup">Sign up</button>
                     <button  className="btn-signup" onClick={()=>navigate("/login")}>go to login</button>
                     {error && <div className="error">{error}</div>}
                 </form>

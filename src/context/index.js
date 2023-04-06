@@ -18,27 +18,26 @@ const AppContext = createContext();
 
 
 const AppProvider = (props)=>{
-    const [user, setUser] = useState(true);
     const [temperature, setTemperature] = useState(0);
     const [lightIntensity, setLightIntensity] = useState(0);
     const [humidity, setHumidity] = useState(0);
     const [lightBtn, setLightBtn] = useState(false);
     const [pumperBtn, setPumperBtn] = useState(false);
     const [airBtn, setAirBtn] = useState(false);
-
+    
     useEffect(()=>{
-       const defaultValue = async () => {
-        setTemperature(await getLastValue('temperature-sensor'))
-        setLightIntensity(await getLastValue('light-sensor'))
-        setHumidity(await getLastValue('humidity-sensor'))
-        setLightBtn(await getLastValue('led'))
-        setPumperBtn(await getLastValue('pumper'))
-        setAirBtn(await getLastValue('fan'))
-       }
-       defaultValue()
+        const defaultValue = async () => {
+            setTemperature(await getLastValue('temperature-sensor'))
+            setLightIntensity(await getLastValue('light-sensor'))
+            setHumidity(await getLastValue('humidity-sensor'))
+            setLightBtn(await getLastValue('led'))
+            setPumperBtn(await getLastValue('pumper'))
+            setAirBtn(await getLastValue('fan'))
+        }
+        defaultValue()
     },[])
     return <AppContext.Provider 
-    value={{user,setUser,temperature,setTemperature,
+    value={{temperature,setTemperature,
         lightIntensity,setLightIntensity,humidity,
         setHumidity,lightBtn,setLightBtn,pumperBtn,setPumperBtn,airBtn,setAirBtn
     }}
