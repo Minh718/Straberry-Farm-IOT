@@ -24,7 +24,7 @@ export default function DiagData({data1, labels}) {
         labels: labels,
         datasets: [{
           label: 'Độ ẩm',
-          data: labels.map(()=> Math.floor(Math.random()*100)),
+          data: data1.data,
           fill: false,
           borderColor: data1.color,
           tension: 0.1

@@ -2,7 +2,7 @@ import {useContext, createContext, useState,useEffect} from "react";
 import axios from 'axios';
 
 const username = 'Heo_Rey'
-const key = 'aio_CIZZ32S1wkz926B26JbS0sicVDJH'
+const key = 'aio_XOYF82w9FYzm2HHmS6m2et3aHcn4'
 
 async function getLastValue (feed_id){
     const url = `https://io.adafruit.com/api/v2/${username}/feeds/${feed_id}/data/last`;
@@ -26,6 +26,7 @@ const AppProvider = (props)=>{
     const [lightBtn, setLightBtn] = useState(false);
     const [pumperBtn, setPumperBtn] = useState(false);
     const [airBtn, setAirBtn] = useState(false);
+    const [strawStatus, setStrawStatus] = useState("Good");
 
     useEffect(()=>{
        const defaultValue = async () => {
@@ -35,13 +36,14 @@ const AppProvider = (props)=>{
         setLightBtn(await getLastValue('led'))
         setPumperBtn(await getLastValue('pumper'))
         setAirBtn(await getLastValue('fan'))
+        setStrawStatus(await getLastValue('strawberry-status'))
        }
        defaultValue()
     },[])
     return <AppContext.Provider 
     value={{user,setUser,temperature,setTemperature,
         lightIntensity,setLightIntensity,humidity,
-        setHumidity,lightBtn,setLightBtn,pumperBtn,setPumperBtn,airBtn,setAirBtn
+        setHumidity,lightBtn,setLightBtn,pumperBtn,setPumperBtn,airBtn,setAirBtn,strawStatus,setStrawStatus
     }}
     >
         {props.children}

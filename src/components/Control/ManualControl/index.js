@@ -9,7 +9,7 @@ const ManualControl = () => {
     const devices= [
         { 
             feed_id: 'fan',
-            value: airBtn === '1'? true:false
+            value: airBtn === '0'? false:true
         },
         { 
             feed_id: 'pumper',

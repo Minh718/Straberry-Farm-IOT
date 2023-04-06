@@ -30,7 +30,12 @@ const ControlSwitch = (props) => {
             if (state === true) {
                 publish(device.feed_id, '0')
             } else {
-                publish(device.feed_id, '1')
+                if (device.feed_id === 'fan'){
+                    publish(device.feed_id,'100')
+                }
+                else{
+                    publish(device.feed_id, '1')
+                }
             }
             return !state
         })

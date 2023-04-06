@@ -37,7 +37,7 @@ import client from './utils/adafruit';
 
 const App = () => {
     const { user } = useAuthContext();
-    const { setTemperature, setLightIntensity, setHumidity, setLightBtn, setPumperBtn, setAirBtn } = useGlobalContext()
+    const { setTemperature, setLightIntensity, setHumidity, setLightBtn, setPumperBtn, setAirBtn,setStrawStatus } = useGlobalContext()
     client.on('message', (topic, message, packet) => {
         console.log("Received '" + message + "' on '" + topic + "'");
         switch (topic.split("/")[2]) {
@@ -52,6 +52,9 @@ const App = () => {
                 break;
             case 'fan':
                 setAirBtn((message.toString()));
+                break;
+            case 'strawberry-status':
+                setStrawStatus((message.toString()));
                 break;
             case 'pumper':
                 setPumperBtn((message.toString()));

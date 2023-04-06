@@ -7,31 +7,70 @@ import "./style.scss"
 import DiagData from '../DiagData/DiagData'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useGlobalContext } from '../../context/index'
+import getData from '../../utils/getData'
 
-const labels = ['Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-const data = [
-  {
-      name: "Nhiệt độ",
-      color: "rgb(15, 136, 249)"
+const labels = ['Mon', 'Tue', 'Thir', 'Wed', 'Fri', 'Sat', 'Sun'];
 
-  },
-  {
-      name: "Độ ẩm",
-      color: "rgb(16, 213, 248)"
-
-  },
-  {
-      name: "Ánh sáng",
-      color: "rgb(252, 163, 61)"
-  },
-  {
-      name: "Tình trạng cây",
-      color: "rgb(63, 221, 102)"
-  }
-]
 export default function Dashboard() {
   const [mode, setMode] = React.useState(0);
-  const {temperature,humidity,lightIntensity} = useGlobalContext()
+  const {temperature,humidity,lightIntensity,strawStatus} = useGlobalContext()
+  const [data,setData] = React.useState([
+    {
+        name: "Nhiệt độ",
+        color: "rgb(15, 136, 249)",
+        data: []
+    },
+    {
+        name: "Độ ẩm",
+        color: "rgb(16, 213, 248)",
+        data: []
+    },
+    {
+        name: "Ánh sáng",
+        color: "rgb(252, 163, 61)",
+        data: []
+    },
+    {
+        name: "Tình trạng cây",
+        color: "rgb(63, 221, 102)",
+        data: []
+    }
+  ])
+  React.useEffect(()=>{
+    const getAllData = async () => {
+      setData([
+        {
+            name: "Nhiệt độ",
+            color: "rgb(15, 136, 249)",
+            data: (await getData('temperature-sensor')).map(e=>parseInt(e))
+        },
+        {
+            name: "Độ ẩm",
+            color: "rgb(16, 213, 248)",
+            data: (await getData('humidity-sensor')).map(e=>parseInt(e))
+        },
+        {
+            name: "Ánh sáng",
+            color: "rgb(252, 163, 61)",
+            data: (await getData('light-sensor')).map(e=>parseInt(e))
+        },
+        {
+            name: "Tình trạng cây",
+            color: "rgb(63, 221, 102)",
+            data: (await getData('strawberry-status')).map(e=>{
+              if (e === 'Good'){
+                return 2
+              }else if (e === 'Dry'){
+                return 1
+              }else{
+                return 0
+              }
+            })
+        }
+      ])
+    }
+    getAllData()
+  },[mode])
   const handleChange = (e)=>{
     setMode(e.target.value);
   }
@@ -129,7 +168,7 @@ export default function Dashboard() {
         <div className='dashboard-bottom-row'>
 
           <DataFarm data={{curVal: lightIntensity, prevVal: 5 ,isCondition: false, color: "#FCA33D",name: "Ánh sáng",  icon: faLightbulb, postfix: "Lux "}} />
-          <DataFarm data={{isCondition: true, color: "#3FDD66",name: "Tình trạng cây",  icon: faSeedling, curVal: "Good"}}/>
+          <DataFarm data={{isCondition: true, color: "#3FDD66",name: "Tình trạng cây",  icon: faSeedling, curVal: strawStatus}}/>
       </div>
         </div>
     </div>
