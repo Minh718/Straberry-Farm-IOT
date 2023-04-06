@@ -1,39 +1,39 @@
-import React,{useState} from 'react'
+import React, { useState } from 'react'
 import "./style.scss"
 import { useNavigate } from 'react-router-dom'
 import LinkSidebar from '../LinkSidebar'
-import { NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { faBell, faDatabase, faHome, faStethoscope, faWrench } from '@fortawesome/free-solid-svg-icons'
 // import {useAuthContext} from "../hooks/useAuthContext"
 import {useAuthContext} from '../../hooks/useAuthContext'
 const links = [
-  {
-    name: "Tổng quan",
-    to: "/",
-    icon: faHome,
-    isNofity: false,
-  },
-  {
-    name: "Điều khiển",
-    to: "/control",
-    isNofity: false,
-    icon: faWrench
-  },  {
-    name: "Dữ liệu",
-    isNofity: false,
-    to: "/datalog",
-    icon: faDatabase
-  },  {
-    name: "Chẩn đoán",
-    to: "/chandoan",
-    isNofity: true,
-    icon: faStethoscope
-  },  {
-    name: "Thông báo",
-    to: "/notification",
-    isNofity: true,
-    icon: faBell
-  }
+    {
+        name: "Tổng quan",
+        to: "/",
+        icon: faHome,
+        isNofity: false,
+    },
+    {
+        name: "Điều khiển",
+        to: "/control",
+        isNofity: false,
+        icon: faWrench
+    }, {
+        name: "Dữ liệu",
+        isNofity: false,
+        to: "/datalog",
+        icon: faDatabase
+    }, {
+        name: "Chẩn đoán",
+        to: "/chandoan",
+        isNofity: true,
+        icon: faStethoscope
+    }, {
+        name: "Thông báo",
+        to: "/notification",
+        isNofity: true,
+        icon: faBell
+    }
 ]
 export default function Sidebar() {
   const {dispatch} = useAuthContext();

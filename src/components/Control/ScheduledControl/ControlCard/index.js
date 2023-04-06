@@ -33,8 +33,8 @@ const ControlCard = ({ type }) => {
 
     return (
         <ThemeProvider theme={outerTheme}>
-            <Card elevation={3}>
-                <CardHeader title={name}></CardHeader>
+            <Card elevation={3} sx={{mb:0}}>
+                <CardHeader title={name} sx={{pb:0}}></CardHeader>
                 <CardContent>
                     <Stack direction="row" alignItems="center" justifyContent="space-between">
                         <StyledTimeField label={<Typography sx={{ display: "flex", alignItems: "center" }}>
@@ -44,7 +44,7 @@ const ControlCard = ({ type }) => {
                             <DarkModeIcon />Kết thúc</Typography>} />
                     </Stack>
                     <Stack alignItems="center" padding={3} pb={0} >
-                        <Box sx={{ maxWidth: "10rem" }}>
+                        <Box sx={{ maxWidth: "9rem" }}>
                             <CircularProgressbarWithChildren
                                 value={50}
                                 styles={{

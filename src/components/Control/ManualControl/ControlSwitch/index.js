@@ -1,5 +1,6 @@
-import { Grid, Paper, Slider, Stack, Switch, Typography } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import { Grid, Stack, Typography, Slider, Paper, Switch } from '@mui/material';
+import React, { useState, useEffect } from 'react'
+
 
 import AcUnitIcon from '@mui/icons-material/AcUnit';
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
@@ -7,60 +8,65 @@ import ShowerIcon from '@mui/icons-material/Shower';
 import { deepPurple, lightBlue } from '@mui/material/colors';
 
 
-import { publish } from '../../../../utils/adafruit';
-const types = [
-    { name: "Điều hòa", icon: <AcUnitIcon sx={{ color: lightBlue[50] }} /> },
-    { name: "Máy bơm", icon: <ShowerIcon /> },
-    { name: "Đèn", icon: <LightbulbIcon /> }
-]
+import { publish } from '../../../../utils/adafruit'
 
-const ControlStyledSwitch = ({ type }) => {
 
-    const { name, icon } = types[type];
 const ControlSwitch = (props) => {
-    console.log(props)
-    const {device,type} = props
-    const [checked,setChecked] = useState(device.value)
-    useEffect(()=>{
+    const { device, type } = props
+    const [checked, setChecked] = useState(device.value)
+    useEffect(() => {
         setChecked(device.value)
-    },[device])
-    const {name, icon} = types[type];
-    const handleChange = ()=>{
+    }, [device])
+
+    const types = [
+        { name: "Điều hòa", icon: <AcUnitIcon sx={{ color: checked ? 'white' : 'black' }} /> },
+        { name: "Máy bơm", icon: <ShowerIcon sx={{ color: checked ? 'white' : 'black' }} /> },
+        { name: "Đèn", icon: <LightbulbIcon sx={{ color: checked ? 'white' : 'black' }} /> }
+    ]
+    const { name, icon } = types[type];
+    const handleChange = () => {
         setChecked(state => {
-            if (state === true){
-                publish(device.feed_id,'0')
-            }else{
-                publish(device.feed_id,'1')
+            if (state === true) {
+                publish(device.feed_id, '0')
+            } else {
+                if (device.feed_id === 'fan'){
+                    publish(device.feed_id,'100')
+                }
+                else{
+                    publish(device.feed_id, '1')
+                }
             }
             return !state
         })
 
     }
     return (
-        <Paper elevation={3} sx={{ padding: 2, width: "10rem", height: "10rem", borderRadius: "2rem", bgcolor: !type ? deepPurple[900] : null }}>
-            <Grid container spacing={3}>
-                <Grid item xs={12}>
-                    <Stack direction="row" justifyContent="space-between">
+        <Paper elevation={3} sx={{borderRadius: "2rem", bgcolor: checked ? deepPurple[900] : null }}>
+            <Grid container sx={{width:'140px', height:"140px", padding: 2 }}>
+                <Grid item xs={12} sx={{}}>
+                    <Stack direction="row" justifyContent="space-between" alignItems="center">
                         {icon}
-                        <Switch 
-                        checked={checked}
-                        onChange={handleChange}
-                         />
+                        <Switch
+                            checked={checked}
+                            onChange={handleChange}
+                        />
                     </Stack>
                 </Grid>
-                <Grid item xs={12}>
-                    <Slider
-                        valueLabelDisplay
-                        defaultValue={30}
-                        sx={type ? {} : { color: 'white' }} />
+
+                <Grid item xs={12} sx={{ }}>
+                    <Stack direction="row" justifyContent="space-between" alignItems="center">
+                        <Slider
+                            valueLabelDisplay
+                            defaultValue={30}
+                            sx={!checked ? {} : { color: 'white' }} />
+                    </Stack>
                 </Grid>
 
-                <Grid item xs={12}>
-                    <Typography sx={type ? {} : { color: lightBlue[50] }}>{`${name} bật`}</Typography>
+                <Grid item xs={12} sx={{}}>
+                    <Typography sx={!checked ? {} : { color: lightBlue[50] }}>{`${name} ${checked ? 'bật' : 'tắt'}`}</Typography>
                 </Grid>
             </Grid>
         </Paper>
     )
 }
-}
-export default ControlStyledSwitch
+export default ControlSwitch

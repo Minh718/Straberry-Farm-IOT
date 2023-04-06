@@ -1,4 +1,3 @@
-
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useAuthContext } from './hooks/useAuthContext'
 
@@ -11,15 +10,15 @@ import Signup from './pages/Signup'
 import Dashboard from "./components/Dashboard";
 import Control from "./pages/Control";
 import Datalog from "./components/Datalog/Datalog";
-import {useGlobalContext} from './context/index';
+import { useGlobalContext } from './context/index';
 import client from './utils/adafruit';
 
 const App = () => {
-    const {user} = useAuthContext();
-    const {setTemperature,setLightIntensity,setHumidity,setLightBtn,setPumperBtn,setAirBtn} = useGlobalContext()
+    const { user } = useAuthContext();
+    const { setTemperature, setLightIntensity, setHumidity, setLightBtn, setPumperBtn, setAirBtn,setStrawStatus } = useGlobalContext()
     client.on('message', (topic, message, packet) => {
         console.log("Received '" + message + "' on '" + topic + "'");
-        switch (topic.split("/")[2]){
+        switch (topic.split("/")[2]) {
             case 'humidity-sensor':
                 setHumidity((message.toString()));
                 break;
@@ -31,6 +30,9 @@ const App = () => {
                 break;
             case 'fan':
                 setAirBtn((message.toString()));
+                break;
+            case 'strawberry-status':
+                setStrawStatus((message.toString()));
                 break;
             case 'pumper':
                 setPumperBtn((message.toString()));
@@ -45,8 +47,8 @@ const App = () => {
     return (<BrowserRouter>
         {user ?
             <Routes>
-                <Route path="/" element={<WebsiteLayout />}>
-                    <Route path="/" element={<Dashboard />} />
+                <Route element={<WebsiteLayout />}>
+                    <Route path="" element={<Dashboard />} />
                     <Route path="control" element={<Control />} />
                     <Route path="datalog" element={<Datalog />} />
                     <Route path="diagnose" element={<Dashboard />} />
@@ -62,7 +64,7 @@ const App = () => {
                 </Routes>
             </LoginLayout>
         }
-    </BrowserRouter>)
+    </BrowserRouter >)
 }
 
 export default App;

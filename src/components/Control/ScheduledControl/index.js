@@ -7,10 +7,10 @@ import {StyledSwitch} from './styles'
 
 const ScheduledControl = () => {
     return (
-        <FormGroup>
-            <Stack direction="row" alignItems="center">
+        <FormGroup >
+            <Stack direction="row" alignItems="center" sx={{py:2}}>
                 <FormLabel component="legend">
-                    <Typography  color='black' variant="h5" sx={{ textTransform: "uppercase", padding: '20px' }}>Đặt lịch trình</Typography>
+                    <Typography  color='black' variant="h5" sx={{ textTransform: "uppercase", px: 2 }}>Đặt lịch trình</Typography>
                 </FormLabel>
                 <StyledSwitch defaultChecked />
                 <ButtonGroup sx={{ ml: 'auto' }}>
